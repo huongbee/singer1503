@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>List Singer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <h2 class="text-center">Update singer 
+                    <i><%=singer.name%></i></h2>
+                    <form method="POST" action="/update">
+                        <input type="hidden" value="<%=singer.id%>" name="id_singer">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control"
+                            name="name" value="<%=singer.name%>" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label>Avatar</label>
+                            <input type="text" class="form-control" name="avatar"  value="<%=singer.avatar%>"  placeholder="Enter Avatar">
+                        </div>
+                        <div class="form-group">
+                            <label>Link</label>
+                            <input type="text" class="form-control" name="link" value="<%=singer.link%>"  placeholder="Enter Link">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

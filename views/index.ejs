@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>List Singer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-success" href="/add-singer">Add new singer</a>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Avatar</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <% arraySinger.forEach(singer=>{ %>
+                                
+                            <tr>
+                                <th scope="row"><%=singer.id%></th>
+                                <td>
+                                    <a target="_blank" href="<%=prefixLink+singer.link%>">
+                                        <%=singer.name%>
+                                    </a>
+                                </td>
+                                <td>
+                                <img src="<%=prefixImg+singer.avatar%>" alt="">
+                                </td>
+                                <td>
+                                <button style="width:100%" type="button" class="btn btn-warning">
+                                    <a href="/update/<%=singer.id%>">Update</a>
+                                </button>
+                                <br><br>
+                                <button style="width:100%"  type="button" class="btn btn-danger" onclick="return confirm('Are you sure?')" >
+                                    <a href="/delete/<%=singer.id%>">Delete</a>
+                                </button>
+                                
+                                </td>
+                            </tr>
+                            
+                            <% })%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

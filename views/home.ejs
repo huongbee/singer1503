@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hello EJS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <%- include('header') %>
+        <h2>Hello EJS</h2>
+
+        <b><i><%=user.name%></i></b>
+
+
+        <% array.forEach(item=>{
+            if(item>5) {
+        %>
+            <p><%= item%></p>
+        <% 
+            }
+        })
+        %>
+
+        <% array.forEach(item=>{%>
+            <p><%= item>5?item:'' %></p>
+        <%  }) %>
+
+        <% array.forEach((item,key)=>{ %>
+            <div>
+                <%=key%>
+            </div>
+        <% })%>
+    </body>
+    <script>
+        let b = 2
+    </script>
+</html>
