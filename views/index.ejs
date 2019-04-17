@@ -25,25 +25,25 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <% arraySinger.forEach(singer=>{ %>
+                            <% singers.forEach(singer=>{ %>
                                 
                             <tr>
                                 <th scope="row"><%=singer.id%></th>
                                 <td>
-                                    <a target="_blank" href="<%=prefixLink+singer.link%>">
+                                    <a target="_blank" >
                                         <%=singer.name%>
                                     </a>
                                 </td>
                                 <td>
-                                <img src="<%=prefixImg+singer.avatar%>" alt="">
+                                <img src="" alt="">
                                 </td>
                                 <td>
                                 <button style="width:100%" type="button" class="btn btn-warning">
-                                    <a href="/update/<%=singer.id%>">Update</a>
+                                    <a href="/update/<%=singer._id%>">Update</a>
                                 </button>
                                 <br><br>
                                 <button style="width:100%"  type="button" class="btn btn-danger" onclick="return confirm('Are you sure?')" >
-                                    <a href="/delete/<%=singer.id%>">Delete</a>
+                                    <a href="/delete/<%=singer._id%>">Delete</a>
                                 </button>
                                 
                                 </td>

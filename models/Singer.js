@@ -9,5 +9,5 @@ const SingerSchema = new Schema({
     link: String,
     avatar: String
 })
-const UserModel = mongoose.model('singer',SingerSchema);
-module.exports = UserModel
+const SingerModel = mongoose.model('singer',SingerSchema);
+module.exports = { SingerModel }
