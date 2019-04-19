@@ -11,19 +11,20 @@
             <div class="row justify-content-center">
                 <div class="col-6">
                     <h2 class="text-center">Add new singer</h2>
-                    <form method="POST" action="/add-singer">
+                    <form method="POST" action="/add-singer" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control"
                             name="name" placeholder="Enter name">
                         </div>
                         <div class="form-group">
-                            <label>Avatar</label>
-                            <input type="text" class="form-control" name="avatar" placeholder="Enter Avatar">
-                        </div>
-                        <div class="form-group">
                             <label>Link</label>
                             <input type="text" class="form-control" name="link" placeholder="Enter Link">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Avatar</label>
+                            <input type="file" name="avatar" >
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>

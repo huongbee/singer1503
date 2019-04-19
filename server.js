@@ -2,6 +2,24 @@ const express = require('express')
 const mongoose = require('mongoose');
 const { SingerModel } = require('./models/Singer')
 const bodyParser = require('body-parser')
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination:(req,file, cb)=>{
+        cb(null, '/public/images');
+    },
+    filename: (req,file, cb)=>{
+        cb(null, Date.now() + '-' +file.filename);
+    }
+})
+function fileFilter(req,file, cb){
+    if(file.mimetype !== 'image/png' || file.mimetype !== 'image/jpeg' || file.mimetype !== 'image/jpg')
+        return cb(new Error('File not allow!'))
+    return cb(null,true);
+}
+const upload = multer({
+    storage, fileFilter, limits:{ fileSize:102400}
+})
 const app = express();
 
 mongoose.connect('mongodb://localhost/singer1503',{
@@ -38,5 +56,5 @@ app.get('/delete/:id',(req,res)=>{
     const id = req.params.id
     
 })
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 3000
 app.listen(port)
