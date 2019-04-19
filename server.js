@@ -13,9 +13,9 @@ const storage = multer.diskStorage({
     }
 })
 function fileFilter(req,file, cb){
-    if(file.mimetype !== 'image/png' || file.mimetype !== 'image/jpeg' || file.mimetype !== 'image/jpg')
-        return cb(new Error('File not allow!'))
-    return cb(null,true);
+    if(file.mimetype == 'image/png' || file.mimetype == 'image/jpeg' || file.mimetype == 'image/jpg')
+        return cb(null,true);
+    return cb(new Error('File not allow!'))
 }
 const upload = multer({
     storage, fileFilter, limits:{ fileSize:102400}
