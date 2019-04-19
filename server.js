@@ -11,6 +11,7 @@ mongoose.connect('mongodb://localhost/singer1503',{
 })
 app.use(bodyParser.urlencoded({extended:false}))
 app.set('view engine','ejs');
+app.use(express.static('./public/'));
 
 app.get('/',(req,res)=>{
     SingerModel.find()
@@ -28,7 +29,17 @@ app.post('/add-singer',(req,res)=>{
         if(err) return res.send({error: err.message})
         const { name, link } = req.body;
         const avatar = req.file;
-        res.send({name, link, avatar})
+        SingerModel.create({
+            name,
+            link,
+            avatar: avatar.filename
+        })
+        .then(()=>{
+            res.redirect('/');
+        })
+        .catch(err=>{
+            res.send({error: err.message})
+        })
     })
 })
 app.get('/update/:id',(req,res)=>{

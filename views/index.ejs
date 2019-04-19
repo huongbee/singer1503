@@ -27,17 +27,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <% singers.forEach(singer=>{ %>
+                            <% singers.forEach((singer, index)=>{ %>
                                 
                             <tr>
-                                <th scope="row"><%=singer.id%></th>
+                                <th scope="row">
+                                    <%=index+1%>
+                                </th>
                                 <td>
-                                    <a target="_blank" >
+                                    <a href="<%=singer.link%>" target="_blank" >
                                         <%=singer.name%>
                                     </a>
                                 </td>
                                 <td>
-                                <img src="" alt="">
+                                <img width="200px" src="images/<%=singer.avatar%>" alt="">
                                 </td>
                                 <td>
                                 <button style="width:100%" type="button" class="btn btn-warning">
