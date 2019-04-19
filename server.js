@@ -30,7 +30,10 @@ app.get('/',(req,res)=>{
     .then(singers=>{
         res.render('index',{singers})
     })
-    .catch(err=>console.log(err))
+    .catch(err=>{
+        req.flash('error_message',err.message)
+        return res.redirect('/')
+    })
 })
 
 app.get('/add-singer',(req,res)=>{
