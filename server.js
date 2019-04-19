@@ -24,7 +24,12 @@ app.get('/add-singer',(req,res)=>{
     res.render('add')
 })
 app.post('/add-singer',(req,res)=>{
-    
+    upload.single('avatar')(req,res,err=>{
+        if(err) return res.send({error: err.message})
+        const { name, link } = req.body;
+        const avatar = req.file;
+        res.send({name, link, avatar})
+    })
 })
 app.get('/update/:id',(req,res)=>{
     const {id} = req.params
