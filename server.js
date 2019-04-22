@@ -80,7 +80,30 @@ app.get('/update/:id',(req,res)=>{
     })
 })
 app.post('/update',(req,res)=>{
-    const { id_singer, name, avatar, link } = req.body
+    upload.single('avatar')(req,res,err=>{
+        const { id_singer, name, link } = req.body
+        const avatar = req.file;
+        if(err){
+            req.flash('error_message', err.message)
+            return res.redirect(`/update/${id_singer}`)
+        }
+        SingerModel.findById(id_singer)
+        .then(singer=>{
+            if(singer){
+                //update
+                //check isset avatar to change filename in db
+            }
+            else{
+                req.flash('error_message', 'Singer not found!')
+                return res.redirect('/')
+            }
+        })
+        .catch(err=>{
+            req.flash('error_message', 'SingerID not found!')
+            return res.redirect('/')
+        })
+        
+    })
     
 })
 app.get('/delete/:id',(req,res)=>{
