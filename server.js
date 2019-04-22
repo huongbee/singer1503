@@ -87,22 +87,48 @@ app.post('/update',(req,res)=>{
             req.flash('error_message', err.message)
             return res.redirect(`/update/${id_singer}`)
         }
-        SingerModel.findById(id_singer)
-        .then(singer=>{
-            if(singer){
-                //update
-                //check isset avatar to change filename in db
-            }
-            else{
-                req.flash('error_message', 'Singer not found!')
-                return res.redirect('/')
-            }
+        const avatarName = avatar ? avatar.filename : singer.avatar
+        SingerModel.findByIdAndUpdate(id_singer,{
+            name, link, avatar: avatarName
         })
-        .catch(err=>{
-            req.flash('error_message', 'SingerID not found!')
+        .then(()=>{
+            req.flash('success_message', 'Update success!')
             return res.redirect('/')
         })
-        
+        .catch(err=>{
+            req.flash('error_message', 'Singer not found!')
+            return res.redirect('/')
+        })
+
+
+
+
+        /**
+            SingerModel.findById(id_singer)
+            .then(singer=>{
+                if(singer){
+                    //check isset avatar to change filename in db
+                    const avatarName = avatar ? avatar.filename : singer.avatar
+                    return SingerModel.update({_id:singer._id},{
+                        name, link, 
+                        avatar: avatarName
+                    })
+                }
+                else{
+                    req.flash('error_message', 'Singer not found!')
+                    return res.redirect('/')
+                }
+            })
+            .then(()=>{
+                req.flash('success_message', 'Update success!')
+                return res.redirect('/')
+            })
+            .catch(err=>{
+                req.flash('error_message', 'SingerID not found!')
+                return res.redirect('/')
+            })
+            
+        */
     })
     
 })
@@ -112,3 +138,13 @@ app.get('/delete/:id',(req,res)=>{
 })
 const port = process.env.PORT || 3000
 app.listen(port)
+
+
+SingerModel.findById('....')
+.then((singer)=>{
+    return SingerModel.update()
+})
+.then()
+.catch(err=>{
+
+})
