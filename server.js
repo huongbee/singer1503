@@ -7,6 +7,8 @@ const flash = require('connect-flash');
 const session = require('express-session')
 const app = express();
 
+// yarn add fs
+
 mongoose.connect('mongodb://localhost/singer1503',{
     useNewUrlParser:true,
     useCreateIndex:true
@@ -22,6 +24,7 @@ app.use(session({
 app.use(flash())
 app.use((req,res,next)=>{
     res.locals.error_message = req.flash('error_message');
+    res.locals.success_message = req.flash('success_message')
     next();
 })
 
@@ -87,48 +90,29 @@ app.post('/update',(req,res)=>{
             req.flash('error_message', err.message)
             return res.redirect(`/update/${id_singer}`)
         }
-        const avatarName = avatar ? avatar.filename : singer.avatar
-        SingerModel.findByIdAndUpdate(id_singer,{
-            name, link, avatar: avatarName
+        SingerModel.findById(id_singer)
+        .then(singer=>{
+            if(singer!=null){
+                //check isset avatar to change filename in db
+                const avatarName = avatar ? avatar.filename : singer.avatar
+                return SingerModel.update({_id:singer._id},{
+                    name, link, 
+                    avatar: avatarName
+                })
+            }
+            else{
+                req.flash('error_message', 'Singer not found!')
+                return res.redirect('/')
+            }
         })
         .then(()=>{
             req.flash('success_message', 'Update success!')
             return res.redirect('/')
         })
         .catch(err=>{
-            req.flash('error_message', 'Singer not found!')
+            req.flash('error_message', err.message)
             return res.redirect('/')
         })
-
-
-
-
-        /**
-            SingerModel.findById(id_singer)
-            .then(singer=>{
-                if(singer){
-                    //check isset avatar to change filename in db
-                    const avatarName = avatar ? avatar.filename : singer.avatar
-                    return SingerModel.update({_id:singer._id},{
-                        name, link, 
-                        avatar: avatarName
-                    })
-                }
-                else{
-                    req.flash('error_message', 'Singer not found!')
-                    return res.redirect('/')
-                }
-            })
-            .then(()=>{
-                req.flash('success_message', 'Update success!')
-                return res.redirect('/')
-            })
-            .catch(err=>{
-                req.flash('error_message', 'SingerID not found!')
-                return res.redirect('/')
-            })
-            
-        */
     })
     
 })
