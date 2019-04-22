@@ -12,20 +12,19 @@
                 <div class="col-6">
                     <h2 class="text-center">Update singer 
                     <i><%=singer.name%></i></h2>
-                    <form method="POST" action="/update">
-                        <input type="hidden" value="<%=singer.id%>" name="id_singer">
+                    <form method="POST" action="/update" enctype="multipart/form-data">
+                        <input type="hidden" value="<%=singer._id%>" name="id_singer">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control"
                             name="name" value="<%=singer.name%>" placeholder="Enter name">
                         </div>
                         <div class="form-group">
-                            <label>Avatar</label>
-                            <input type="text" class="form-control" name="avatar"  value="<%=singer.avatar%>"  placeholder="Enter Avatar">
-                        </div>
-                        <div class="form-group">
                             <label>Link</label>
                             <input type="text" class="form-control" name="link" value="<%=singer.link%>"  placeholder="Enter Link">
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="avatar">
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
