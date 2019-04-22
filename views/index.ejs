@@ -15,6 +15,15 @@
                 </div>
             </div>
             <br>
+            <% if(error_message !=''){%>
+                <div class="row justify-content-center">
+                    <div class="col-6 ">
+                        <div class="alert alert-danger">
+                            <%=error_message%>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
             <div class="row">
                 <div class="col-12">
                     <table class="table table-hover">

@@ -57,14 +57,27 @@ app.post('/add-singer',(req,res)=>{
         })
         .catch(err=>{
             req.flash('error_message',err.message)
-            // return res.redirect('/add-singer')
+            return res.redirect('/add-singer')
         })
     })
 })
 app.get('/update/:id',(req,res)=>{
-    const {id} = req.params
-    //check id exixts in arrSinger
-    
+    const { id } = req.params
+    SingerModel.findById(id)
+    .then(singer=>{
+        if(singer){
+            res.render('update',{singer})
+        }
+        else{
+            req.flash('error_message', 'Singer not found!')
+            return res.redirect('/')
+        }
+    })
+    .catch(err=>{
+        // req.flash('error_message',err.message)
+        req.flash('error_message', 'SingerID not found!')
+        return res.redirect('/')
+    })
 })
 app.post('/update',(req,res)=>{
     const { id_singer, name, avatar, link } = req.body
