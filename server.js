@@ -118,17 +118,15 @@ app.post('/update',(req,res)=>{
 })
 app.get('/delete/:id',(req,res)=>{
     const id = req.params.id
-    
+    SingerModel.findByIdAndDelete(id)
+    .then(()=>{
+        req.flash('success_message', 'Delete success!')
+        return res.redirect('/')
+    })
+    .catch(err=>{
+        req.flash('error_message', err.message)
+        return res.redirect('/')
+    })
 })
 const port = process.env.PORT || 3000
 app.listen(port)
-
-
-SingerModel.findById('....')
-.then((singer)=>{
-    return SingerModel.update()
-})
-.then()
-.catch(err=>{
-
-})
