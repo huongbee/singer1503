@@ -9,10 +9,24 @@ const app = express();
 
 // yarn add fs
 
-mongoose.connect('mongodb://localhost/singer1503',{
+// mongoose.connect('mongodb://localhost/singer1503',{
+//     useNewUrlParser:true,
+//     useCreateIndex:true
+// })
+//dbname: ten database
+mongoose.connect('mongodb+srv://singer1503:singer1503@@@@cluster0-jbmvc.mongodb.net/dbname?retryWrites=true',{
     useNewUrlParser:true,
     useCreateIndex:true
 })
+mongoose.connection
+.then(()=>{
+    console.log('DB Connected!')
+})
+.catch(err=>{
+    console.log(err.message)
+})
+
+
 app.use(bodyParser.urlencoded({extended:false}))
 app.set('view engine','ejs');
 app.use(express.static('./public/'));
